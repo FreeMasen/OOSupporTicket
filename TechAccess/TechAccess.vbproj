@@ -58,6 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
+    <Import Include="OOSupportTickets" />
+    <Import Include="OOSupportTickets.My" />
+    <Import Include="OOSupportTickets.My.Resources" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
@@ -115,6 +118,12 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OOSupportTickets\HelpDesk.vbproj">
+      <Project>{bf0a906e-5812-44c4-8392-780b64902f88}</Project>
+      <Name>HelpDesk</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
