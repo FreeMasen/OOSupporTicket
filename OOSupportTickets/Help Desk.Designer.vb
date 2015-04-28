@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form1
+Partial Class HelpDesk
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -169,7 +169,7 @@ Partial Class Form1
         Me.txtEmail.Size = New System.Drawing.Size(340, 26)
         Me.txtEmail.TabIndex = 15
         '
-        'Form1
+        'HelpDesk
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -189,8 +189,8 @@ Partial Class Form1
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Name = "Form1"
-        Me.Text = "Add/Assign Tickets"
+        Me.Name = "HelpDesk"
+        Me.Text = "Help Desk"
         CType(Me.numSeverity, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
