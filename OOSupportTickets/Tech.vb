@@ -20,7 +20,7 @@ Public Class Tech
 
     'this fucntion allows for the emailing of a tech, this will be used to
     'provide new tickets for a tech when it is assigned
-    Public Sub emailTicket(subject As String, body As String)
+    Public Sub emailTicket(subject As String, Optional body As String = Nothing)
         subject = subject.Replace(" ", "%20")
         body = body.Replace(" ", "%20")
         Process.Start(String.Format("mailto:{0}?subject={1}&body={2}", Me.email, subject, body))
