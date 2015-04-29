@@ -58,4 +58,5 @@ Public Class Tech
         End If
         Return String.Format("{0} {1}, {2}", firstname, lastname, skill)
     End Function
+
 End Class

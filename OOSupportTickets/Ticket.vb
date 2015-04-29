@@ -35,4 +35,18 @@
         End If
     End Function
 
+    Public Function toStringShort() As String
+        Return String.Format("Ticket ID: {0} | Severity : {1} | Date Reported: {2}", Me.ID, Me.severity, Me.dateReported)
+    End Function
+
+    Public Sub emailReporter(subject As String, Optional body As String = "")
+        subject = subject.Replace(" ", "%20")
+        body = body.Replace(" ", "%20")
+        If Me.resolved = True Then
+            Process.Start(String.Format("mailto:{0}?subject={1}&body={2}", Me.repEmail, subject, body))
+        ElseIf Me.resolved = False Then
+            Process.Start(String.Format("mailto:{0}?subject={1}", Me.repEmail, subject))
+        End If
+    End Sub
+
 End Class
