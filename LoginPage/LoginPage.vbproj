@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BF0A906E-5812-44C4-8392-780B64902F88}</ProjectGuid>
+    <ProjectGuid>{A2FC7980-32E6-4134-A3FA-E5B2493658C8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>OOSupportTickets.My.MyApplication</StartupObject>
-    <RootNamespace>OOSupportTickets</RootNamespace>
-    <AssemblyName>OOSupportTickets</AssemblyName>
+    <StartupObject>LoginPage.My.MyApplication</StartupObject>
+    <RootNamespace>LoginPage</RootNamespace>
+    <AssemblyName>LoginPage</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -20,7 +20,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>OOSupportTickets.xml</DocumentationFile>
+    <DocumentationFile>LoginPage.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -30,7 +30,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>OOSupportTickets.xml</DocumentationFile>
+    <DocumentationFile>LoginPage.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -40,7 +40,7 @@
     <OptionCompare>Binary</OptionCompare>
   </PropertyGroup>
   <PropertyGroup>
-    <OptionStrict>On</OptionStrict>
+    <OptionStrict>Off</OptionStrict>
   </PropertyGroup>
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
@@ -58,6 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
+    <Import Include="ModifyTechs" />
+    <Import Include="ModifyTechs.My" />
+    <Import Include="ModifyTechs.My.Resources" />
+    <Import Include="OOSupportTickets" />
+    <Import Include="OOSupportTickets.My" />
+    <Import Include="OOSupportTickets.My.Resources" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
@@ -68,25 +74,16 @@
     <Import Include="System.Linq" />
     <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
+    <Import Include="TechAccess" />
+    <Import Include="TechAccess.My" />
+    <Import Include="TechAccess.My.Resources" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assignments.Designer.vb">
-      <DependentUpon>Assignments.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Assignments.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Help Desk.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Help Desk.Designer.vb">
-      <DependentUpon>Help Desk.vb</DependentUpon>
+    <Compile Include="Login.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Login.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -104,41 +101,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ResolutionWindow.Designer.vb">
-      <DependentUpon>ResolutionWindow.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ResolutionWindow.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SQLBot.vb" />
-    <Compile Include="startenddate.Designer.vb">
-      <DependentUpon>startenddate.vb</DependentUpon>
-    </Compile>
-    <Compile Include="startenddate.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SupervisorControlPanel.Designer.vb">
-      <DependentUpon>SupervisorControlPanel.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SupervisorControlPanel.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tech.vb" />
-    <Compile Include="TechControlPanel.Designer.vb">
-      <DependentUpon>TechControlPanel.vb</DependentUpon>
-    </Compile>
-    <Compile Include="TechControlPanel.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Ticket.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assignments.resx">
-      <DependentUpon>Assignments.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Help Desk.resx">
-      <DependentUpon>Help Desk.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
     </EmbeddedResource>
@@ -147,18 +111,6 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ResolutionWindow.resx">
-      <DependentUpon>ResolutionWindow.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="startenddate.resx">
-      <DependentUpon>startenddate.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SupervisorControlPanel.resx">
-      <DependentUpon>SupervisorControlPanel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TechControlPanel.resx">
-      <DependentUpon>TechControlPanel.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +124,20 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ModifyTechs\ModifyTechs\SupervisorAccess.vbproj">
+      <Project>{88e7f5c6-039f-49a4-80da-19ccb1f36de0}</Project>
+      <Name>SupervisorAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOSupportTickets\HelpDesk.vbproj">
+      <Project>{bf0a906e-5812-44c4-8392-780b64902f88}</Project>
+      <Name>HelpDesk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TechAccess\TechAccess.vbproj">
+      <Project>{404a7f6c-f718-4f41-a16f-00004d1bb02d}</Project>
+      <Name>TechAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

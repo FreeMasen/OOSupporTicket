@@ -9,13 +9,23 @@ Public Class Tech
     'this is an enumeration to ensure that roles will not be entered incorrectly
     'it corresponds with an int value in the datatable. 
     Public Property role As Skillset
+    Public ReadOnly Property username As String
+        Get
+            Dim uname As String
+            uname = String.Format("{0}{1}", Me.firstname.Substring(0), Me.lastname)
+            Return uname
+        End Get
+    End Property
 
     'class constructor  taking in the required info to create a tech 
-    Public Sub New(FirstName As String, lastName As String, email As String, role As Integer)
+    Public Sub New(FirstName As String, lastName As String, email As String, role As Integer, Optional id As Integer = 0)
         Me.firstname = FirstName
         Me.lastname = lastName
         Me.email = email
         Me.role = CType(role, Skillset)
+        If id <> 0 Then
+            Me.TechID = id
+        End If
     End Sub
 
     'this fucntion allows for the emailing of a tech, this will be used to

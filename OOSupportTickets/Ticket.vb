@@ -15,13 +15,16 @@
     'constructor that corresponds all non-nullable cells from the database
     'to create a new ticket.
     Public Sub New(issue As String, reporter As String, repEmail As String, reported As Date, _
-                            severity As Integer, resolved As Boolean)
+                            severity As Integer, resolved As Boolean, Optional id As Integer = 0)
         Me.Issue = issue
         Me.Reporter = reporter
         Me.repEmail = repEmail
         Me.dateReported = reported
         Me.severity = severity
         Me.resolved = resolved
+        If id <> 0 Then
+            Me.ID = id
+        End If
     End Sub
 
     'tostring override that checks for an assignment or not

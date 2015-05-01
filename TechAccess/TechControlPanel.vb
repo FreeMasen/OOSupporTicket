@@ -43,8 +43,7 @@ Public Class TicketsToWork
         If techTable.Rows.Count > 0 Then
             'if the table is not empty, add the first row's information as 
             'to the current tech object
-            currentTech = New Tech(CStr(techTable.Rows(0).Item(1)), CStr(techTable.Rows(0).Item(2)), CStr(techTable.Rows(0).Item(3)), techTable.Rows(0).Item(4))
-            currentTech.TechID = CInt((techTable.Rows(0).Item(0)))
+            currentTech = New Tech(CStr(techTable.Rows(0).Item(1)), CStr(techTable.Rows(0).Item(2)), CStr(techTable.Rows(0).Item(3)), techTable.Rows(0).Item(4), CInt((techTable.Rows(0).Item(0))))
         End If
 
 
@@ -63,8 +62,7 @@ Public Class TicketsToWork
             Dim newTicket As Ticket
 
             'consturct a new ticket
-            newTicket = New Ticket(CStr(row.Item(1)), CStr(row.Item(2)), CStr(row.Item(3)), CDate(row.Item(4)), CInt(row.Item(5)), CBool(row.Item(6)))
-            newTicket.ID = CInt(row.Item(0))
+            newTicket = New Ticket(CStr(row.Item(1)), CStr(row.Item(2)), CStr(row.Item(3)), CDate(row.Item(4)), CInt(row.Item(5)), CBool(row.Item(6)), CInt(row.Item(0)))
 
             'add this ticket to the arraylist
             tickets.Add(newTicket)
