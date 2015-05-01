@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Security.Cryptography
+Imports System.Linq
 
 Public Class Login
 
