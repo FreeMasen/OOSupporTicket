@@ -27,6 +27,7 @@ Partial Class Login
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnLogin = New System.Windows.Forms.Button()
+        Me.lblError = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'txtUser
@@ -38,7 +39,7 @@ Partial Class Login
         '
         'txtPW
         '
-        Me.txtPW.Location = New System.Drawing.Point(163, 154)
+        Me.txtPW.Location = New System.Drawing.Point(163, 107)
         Me.txtPW.Name = "txtPW"
         Me.txtPW.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPW.Size = New System.Drawing.Size(346, 26)
@@ -56,7 +57,7 @@ Partial Class Login
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 154)
+        Me.Label2.Location = New System.Drawing.Point(12, 107)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(78, 20)
         Me.Label2.TabIndex = 3
@@ -71,11 +72,20 @@ Partial Class Login
         Me.btnLogin.Text = "Login"
         Me.btnLogin.UseVisualStyleBackColor = True
         '
+        'lblError
+        '
+        Me.lblError.AutoSize = True
+        Me.lblError.Location = New System.Drawing.Point(159, 151)
+        Me.lblError.Name = "lblError"
+        Me.lblError.Size = New System.Drawing.Size(0, 20)
+        Me.lblError.TabIndex = 5
+        '
         'Login
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(576, 244)
+        Me.Controls.Add(Me.lblError)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -92,5 +102,6 @@ Partial Class Login
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents btnLogin As System.Windows.Forms.Button
+    Friend WithEvents lblError As System.Windows.Forms.Label
 
 End Class

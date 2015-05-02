@@ -1,6 +1,5 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Security.Cryptography
-Imports System.Linq
 
 Public Class Login
 
@@ -11,34 +10,40 @@ Public Class Login
 
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+        lblError.Text = ""
+        'if the form is not blank
         If txtPW.Text.Count > 0 And txtUser.Text.Count > 0 Then
 
-            Dim username As String = txtUser.Text.ToLower
-            Dim password As String = txtPW.Text
+            'build a sql command
             Dim getusersql As String = "SELECT * FROM techs WHERE username = @username and password = @password"
             Dim getusercmd As SqlCommand
 
+            'set the parameters
             getusercmd = New SqlCommand(getusersql, Connection)
-
-            getusercmd.Parameters.AddWithValue("@username", username)
-            getusercmd.Parameters.AddWithValue("@password", password)
+            getusercmd.Parameters.AddWithValue("@username", txtUser.Text.ToLower)
+            getusercmd.Parameters.AddWithValue("@password", txtPW.Text)
 
             Try
+                'get the information and fill the table
                 TechDataAdapter = New SqlDataAdapter(getusercmd)
                 TechDataAdapter.Fill(TableOfTechs)
             Catch ex As SqlException
-                MsgBox(String.Format("Error: {0} {1}", ex.Number.ToString, ex.Message))
+                'display an error if that fails
+                lblError.Text = String.Format("Error: {0} {1}", ex.Number.ToString, ex.Message)
+            Catch ex As Exception
+                lblError.Text = String.Format("Error: {0}", ex.Message)
             End Try
             If TableOfTechs.Rows.Count > 0 Then
                 Dim row As DataRow = TableOfTechs.Rows(0)
                 user = New Tech(CStr(row.Item(1)), CStr(row.Item(2)), CStr(row.Item(3)), CInt(row.Item(4)), CInt(row.Item(0)))
-                MsgBox(user.tostring())
             Else
-                MsgBox("no user found")
+                lblError.Text = "no user found"
             End If
         Else
-            MsgBox("Please enter both a username and password")
+            lblError.Text = "Please enter both a username and password"
         End If
+
+        'pass the tech object to the approprate form
         Select Case user.role
             Case Tech.Skillset.deskTech
                 HelpDesk.Tag = CType(user, Tech)

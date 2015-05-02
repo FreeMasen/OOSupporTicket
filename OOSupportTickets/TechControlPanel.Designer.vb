@@ -33,6 +33,7 @@ Partial Class TicketsToWork
         Me.txtIssue = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtResolution = New System.Windows.Forms.TextBox()
+        Me.lblErros = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblTickets
@@ -130,11 +131,20 @@ Partial Class TicketsToWork
         Me.txtResolution.Size = New System.Drawing.Size(657, 92)
         Me.txtResolution.TabIndex = 10
         '
+        'lblErros
+        '
+        Me.lblErros.AutoSize = True
+        Me.lblErros.Location = New System.Drawing.Point(12, 625)
+        Me.lblErros.Name = "lblErros"
+        Me.lblErros.Size = New System.Drawing.Size(0, 20)
+        Me.lblErros.TabIndex = 11
+        '
         'TicketsToWork
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(778, 747)
+        Me.Controls.Add(Me.lblErros)
         Me.Controls.Add(Me.txtResolution)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txtIssue)
@@ -163,5 +173,6 @@ Partial Class TicketsToWork
     Friend WithEvents txtIssue As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txtResolution As System.Windows.Forms.TextBox
+    Friend WithEvents lblErros As System.Windows.Forms.Label
 
 End Class

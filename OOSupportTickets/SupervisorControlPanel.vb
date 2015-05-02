@@ -1,17 +1,9 @@
 ﻿Imports System.Data.SqlClient
 Public Class SupControlPanel
-    'our SQL Server connection string
-    Dim Connection As New SqlConnection("server=HERMAN-W8\sqlexpress;database=support;Trusted_Connection=Yes")
 
-    'data adapter and table for the techs
-    Dim techDataAdapter As New SqlDataAdapter
+    Dim sqlbot As New SQLBot
     Dim techTable As New DataTable
-
-    'data adapter and table for the tickets
-    Dim ticketAdapter As New SqlDataAdapter
     Dim ticketTable As New DataTable
-
-    'data adapter and table for the techs
     Dim techs As New ArrayList
     Dim tickets As New ArrayList
 
@@ -47,13 +39,15 @@ Public Class SupControlPanel
         lstTechs.SelectedIndex = -1
         lstTechs.Items.Clear()
         techTable.Clear()
+        lblError.Text = ""
         Try
             'pull the tech data from the database and store them in a table 
-            techDataAdapter = New SqlDataAdapter("SELECT * FROM techs ORDER BY role DESC", Connection)
-            techDataAdapter.Fill(techTable)
+            techTable = sqlbot.returnDataTable("SELECT * FROM techs ORDER BY role DESC")
         Catch ex As SqlException
             'display the error if this fails
-            MsgBox(String.Format("Error: {0} {1}", ex.Number.ToString, ex.Message))
+            lblError.Text = String.Format("Error: {0} {1}", ex.Number.ToString, ex.Message))
+        Catch ex As Exception
+            lblError.Text = String.Format("Error: {0}",  ex.Message))
         End Try
 
         'check if the table is empty
@@ -78,6 +72,7 @@ Public Class SupControlPanel
     'the last two dates are optional, this is because the start and end date are only
     'needed for the completed version not the pending version
     Private Sub viewAssignemnts(source As String, tech As Integer, agent As String, Optional startDate As Date = Nothing, Optional endDate As Date = Nothing)
+        lblError.Text = ""
         If lstTechs.SelectedIndex > -1 Then
             'creates an arraylist to hold the data
             Dim passedInfo As ArrayList = New ArrayList
@@ -90,6 +85,8 @@ Public Class SupControlPanel
             'store that information in the Tag of the Assigments form
             Assignments.Tag = CType(passedInfo, ArrayList)
             Assignments.Show()
+        Else
+            lblError.Text = "Please select a tech"
         End If
     End Sub
 
@@ -117,8 +114,8 @@ Public Class SupControlPanel
             txtTechEmail.Text = selectedTech.email
             cboTechRole.SelectedIndex = CInt(selectedTech.role)
         Else
-            txtFName.text = ""
-            txtLName.text = ""
+            txtFName.Text = ""
+            txtLName.Text = ""
             txtTechEmail.Text = ""
             cboTechRole.SelectedIndex = -1
         End If
@@ -127,6 +124,7 @@ Public Class SupControlPanel
 
 
     Private Sub btnViewCompleted_Click(sender As Object, e As EventArgs) Handles btnViewCompleted.Click
+        lblError.Text = ""
         'check that a tech is selected
         If lstTechs.SelectedIndex > -1 Then
             'show the startenddate form.
@@ -139,10 +137,13 @@ Public Class SupControlPanel
             'the tech info and start/end date variables are passed to the view assigments method
             'this will bring up the assignments window and show the completed work
             viewAssignemnts("Completed", selectedTech.TechID, selectedTech.tostring, startDate, endDate)
+        Else
+            lblError.Text = "Please select a tech"
         End If
     End Sub
 
     Private Sub btnEditTech_Click(sender As Object, e As EventArgs) Handles btnEditTech.Click
+        lblError.Text = ""
         'if a selection is made
         If lstTechs.SelectedIndex > -1 Then
             'if the form is filled out properlly
@@ -155,7 +156,7 @@ Public Class SupControlPanel
 
                 'build an update query with the information in the selectetech object
                 Dim editString As String = "UPDATE techs SET FirstName = @fname, LastName = @lname, email = @email, role = @role WHERE TechID = @techID"
-                Dim editCommand As New SqlCommand(editString, Connection)
+                Dim editCommand As New SqlCommand(editString, sqlbot.connection)
                 editCommand.Parameters.AddWithValue("@techID", selectedTech.TechID)
                 editCommand.Parameters.AddWithValue("@fname", selectedTech.firstname)
                 editCommand.Parameters.AddWithValue("@lname", selectedTech.lastname)
@@ -164,17 +165,19 @@ Public Class SupControlPanel
 
                 Try
                     'send our query to the database
-                    Connection.Open()
+                    sqlbot.connection.Open()
                     editCommand.ExecuteNonQuery()
-                    Connection.Close()
+                    sqlbot.connection.Close()
                     'update the lists
                     updateLists()
                 Catch ex As SqlException
                     MsgBox(String.Format("Error {0} {1}", ex.Number.ToString, ex.Message))
                 End Try
             Else
-                MsgBox("Please ensure all data is entered and formatted correctly")
+                lblError.Text = "Please ensure all data is entered and formatted correctly"
             End If
+        Else
+            lblError.Text = "Please select a tech to edit"
         End If
     End Sub
 
@@ -186,6 +189,7 @@ Public Class SupControlPanel
     End Sub
 
     Private Sub btnAddTech_Click(sender As Object, e As EventArgs) Handles btnAddTech.Click
+        lblError.Text = ""
         'first check that a selection is not made
         If lstTechs.SelectedIndex = -1 Then
             'next check if the form is filled out properlly
@@ -196,7 +200,7 @@ Public Class SupControlPanel
 
                 'build a new query to insert this into the table
                 Dim newTechQuery As String = "INSERT INTO techs (FirstName, LastName, email, role) VALUES (@fname, @lname, @email, @role)"
-                Dim newTechCmd As New SqlCommand(newTechQuery, Connection)
+                Dim newTechCmd As New SqlCommand(newTechQuery, sqlbot.connection)
 
                 newTechCmd.Parameters.AddWithValue("@fname", newTech.firstname)
                 newTechCmd.Parameters.AddWithValue("@lname", newTech.lastname)
@@ -205,30 +209,35 @@ Public Class SupControlPanel
 
                 Try
                     'send that info to the database and update the lists
-                    Connection.Open()
+                    sqlbot.connection.Open()
                     newTechCmd.ExecuteNonQuery()
-                    Connection.Close()
+                    sqlbot.connection.Close()
                     updateLists()
                 Catch ex As SqlException
-                    MsgBox(String.Format("Error: {0} {1}", ex.Number.ToString, ex.Message))
+                    lblError.Text = String.Format("Error: {0} {1}", ex.Number.ToString, ex.Message)
+                Catch ex As Exception
+                    lblError.Text = String.Format("Error: {0} ", ex.Message)
                 End Try
-
+            Else
+                lblError.Text = "Information missing from one or more textbox"
 
             End If
         Else
             'To avoid accidentlly submitting an already existing set of data to the database as a new row
             'I have made it a requirement that the new tech information must be added to the form manually
-            MsgBox("You must de-select your current item to add a new tech to this list")
+            lblError.Text = "You must de-select your current item to add a new tech to this list"
         End If
 
     End Sub
 
     Private Sub btnHelpDesk_Click(sender As Object, e As EventArgs) Handles btnHelpDesk.Click
+        'send the supervisor's tech object to the helpdesk form
         HelpDesk.Tag = CType(Me.Tag, Tech)
         HelpDesk.Show()
     End Sub
 
     Private Sub btnTechAccess_Click(sender As Object, e As EventArgs) Handles btnTechAccess.Click
+        'send the supervisor's tech object to the tech access form
         TicketsToWork.Tag = CType(Me.Tag, Tech)
         TicketsToWork.Show()
     End Sub

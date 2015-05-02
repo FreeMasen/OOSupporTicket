@@ -39,6 +39,7 @@ Partial Class SupControlPanel
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnTechAccess = New System.Windows.Forms.Button()
         Me.btnHelpDesk = New System.Windows.Forms.Button()
+        Me.lblError = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblFName
@@ -187,11 +188,20 @@ Partial Class SupControlPanel
         Me.btnHelpDesk.Text = "Open Help Desk"
         Me.btnHelpDesk.UseVisualStyleBackColor = True
         '
+        'lblError
+        '
+        Me.lblError.AutoSize = True
+        Me.lblError.Location = New System.Drawing.Point(13, 418)
+        Me.lblError.Name = "lblError"
+        Me.lblError.Size = New System.Drawing.Size(0, 20)
+        Me.lblError.TabIndex = 18
+        '
         'SupControlPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1034, 570)
+        Me.Controls.Add(Me.lblError)
         Me.Controls.Add(Me.btnHelpDesk)
         Me.Controls.Add(Me.btnTechAccess)
         Me.Controls.Add(Me.btnDelete)
@@ -232,5 +242,6 @@ Partial Class SupControlPanel
     Friend WithEvents btnDelete As System.Windows.Forms.Button
     Friend WithEvents btnTechAccess As System.Windows.Forms.Button
     Friend WithEvents btnHelpDesk As System.Windows.Forms.Button
+    Friend WithEvents lblError As System.Windows.Forms.Label
 
 End Class

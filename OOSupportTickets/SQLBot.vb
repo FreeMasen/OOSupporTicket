@@ -1,24 +1,15 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Data
 Public Class SQLBot
-    Dim connectionString As String = "server=HERMANW7\SQLEXPRESS;database=movies;user id=sa;password=password"
-    Dim bindingSource As New BindingSource
-    Dim objdataAdapter As SqlDataAdapter
+    Public Property connection As New SqlConnection("server=HERMAN-W8\sqlexpress;database=support;Trusted_Connection=Yes")
 
-    Dim objDataTable As DataTable
+    Public Function returnDataTable(sqlQuery As String) As DataTable
+        Dim dataAdapter As SqlDataAdapter
+        Dim datatable As New DataTable
+        dataAdapter = New SqlDataAdapter(sqlQuery, connection)
+        dataAdapter.Fill(datatable)
 
-    Public Sub getData(sqlQuery As String)
-        objdataAdapter = New SqlDataAdapter(sqlQuery, connectionString)
-        Dim objCommandBuilder As New SqlCommandBuilder(objdataAdapter)
+        Return datatable
 
-        objDataTable = New DataTable()
-
-        objdataAdapter.Fill(objDataTable)
-        bindingSource.DataSource = objDataTable
-
-    End Sub
-
-    Public Sub enterPendingTicket(entry As Ticket)
-
-    End Sub
+    End Function
 End Class
