@@ -45,9 +45,9 @@ Public Class SupControlPanel
             techTable = sqlbot.returnDataTable("SELECT * FROM techs ORDER BY role DESC")
         Catch ex As SqlException
             'display the error if this fails
-            lblError.Text = String.Format("Error: {0} {1}", ex.Number.ToString, ex.Message))
+            lblError.Text = String.Format("Error: {0} {1}", ex.Number.ToString, ex.Message)
         Catch ex As Exception
-            lblError.Text = String.Format("Error: {0}",  ex.Message))
+            lblError.Text = String.Format("Error: {0}", ex.Message)
         End Try
 
         'check if the table is empty
