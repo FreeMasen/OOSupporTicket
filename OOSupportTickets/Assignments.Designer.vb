@@ -23,6 +23,7 @@ Partial Class Assignments
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.txtAssignments = New System.Windows.Forms.TextBox()
+        Me.btnEmail = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'txtAssignments
@@ -34,11 +35,21 @@ Partial Class Assignments
         Me.txtAssignments.Size = New System.Drawing.Size(1132, 687)
         Me.txtAssignments.TabIndex = 0
         '
+        'btnEmail
+        '
+        Me.btnEmail.Location = New System.Drawing.Point(964, 693)
+        Me.btnEmail.Name = "btnEmail"
+        Me.btnEmail.Size = New System.Drawing.Size(168, 66)
+        Me.btnEmail.TabIndex = 1
+        Me.btnEmail.Text = "Email tech work list"
+        Me.btnEmail.UseVisualStyleBackColor = True
+        '
         'Assignments
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1144, 796)
+        Me.Controls.Add(Me.btnEmail)
         Me.Controls.Add(Me.txtAssignments)
         Me.Name = "Assignments"
         Me.Text = "Assignments"
@@ -47,4 +58,5 @@ Partial Class Assignments
 
     End Sub
     Friend WithEvents txtAssignments As System.Windows.Forms.TextBox
+    Friend WithEvents btnEmail As System.Windows.Forms.Button
 End Class

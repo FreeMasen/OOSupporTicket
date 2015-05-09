@@ -241,4 +241,9 @@ Public Class SupControlPanel
         TicketsToWork.Tag = CType(Me.Tag, Tech)
         TicketsToWork.Show()
     End Sub
+
+    Private Sub lblHelp_Click(sender As Object, e As EventArgs) Handles lblHelp.Click
+        help.Tag = "sup"
+        help.Show()
+    End Sub
 End Class

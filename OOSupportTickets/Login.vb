@@ -2,7 +2,6 @@
 Imports System.Security.Cryptography
 
 Public Class Login
-
     Dim Connection As New SqlConnection("server=HERMAN-W8\sqlexpress;database=support;Trusted_Connection=Yes")
     Dim TechDataAdapter As New SqlDataAdapter
     Dim TableOfTechs As New DataTable
@@ -14,7 +13,7 @@ Public Class Login
         'if the form is not blank
         If txtPW.Text.Count > 0 And txtUser.Text.Count > 0 Then
 
-            'build a sql command
+            'build an sql command
             Dim getusersql As String = "SELECT * FROM techs WHERE username = @username and password = @password"
             Dim getusercmd As SqlCommand
 
@@ -55,5 +54,6 @@ Public Class Login
                 TicketsToWork.Tag = CType(user, Tech)
                 TicketsToWork.Show()
         End Select
+        Me.Hide()
     End Sub
 End Class
