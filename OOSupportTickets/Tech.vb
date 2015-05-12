@@ -30,11 +30,11 @@ Public Class Tech
 
     'this fucntion allows for the emailing of a tech, this will be used to
     'provide new tickets for a tech when it is assigned
-    Public Sub emailTicket(subject As String, Optional body As String = Nothing)
+    Public Sub emailTicket(subject As String, Optional body As String = "")
         subject = subject.Replace(" ", "%20")
         body = body.Replace(" ", "%20")
+
         Process.Start(String.Format("mailto:{0}?subject={1}&body={2}", Me.email, subject, body))
-        'Process.Start("mailto:r.f.masen@gmail.com?subject:help&body:helping")
     End Sub
 
     'defines the possible skillsets that can be applied to a role

@@ -35,6 +35,20 @@ Public Class Login
             If TableOfTechs.Rows.Count > 0 Then
                 Dim row As DataRow = TableOfTechs.Rows(0)
                 user = New Tech(CStr(row.Item(1)), CStr(row.Item(2)), CStr(row.Item(3)), CInt(row.Item(4)), CInt(row.Item(0)))
+
+                Select Case user.role
+                    Case Tech.Skillset.deskTech
+                        HelpDesk.Tag = CType(user, Tech)
+                        HelpDesk.Show()
+                    Case Tech.Skillset.manager
+                        SupControlPanel.Tag = CType(user, Tech)
+                        SupControlPanel.Show()
+                    Case Else
+                        TicketsToWork.Tag = CType(user, Tech)
+                        TicketsToWork.Show()
+                End Select
+
+                Me.Hide()
             Else
                 lblError.Text = "no user found"
             End If
@@ -43,17 +57,6 @@ Public Class Login
         End If
 
         'pass the tech object to the approprate form
-        Select Case user.role
-            Case Tech.Skillset.deskTech
-                HelpDesk.Tag = CType(user, Tech)
-                HelpDesk.Show()
-            Case Tech.Skillset.manager
-                SupControlPanel.Tag = CType(user, Tech)
-                SupControlPanel.Show()
-            Case Else
-                TicketsToWork.Tag = CType(user, Tech)
-                TicketsToWork.Show()
-        End Select
-        Me.Hide()
+        
     End Sub
 End Class

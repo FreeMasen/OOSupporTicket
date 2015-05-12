@@ -2,9 +2,6 @@
 
 Public Class HelpDesk
     Dim sqlbot As New SQLBot
-    'defines to source for all of the tables we will be referencing
-    Dim Connection As New SqlConnection("server=HERMAN-W8\sqlexpress;database=support;Trusted_Connection=Yes")
-
     'this block also sets up a data adapter and data table to be used
     'by other parts of the program that need to reference/modify the tickets table
     Dim dataAdapter As New SqlDataAdapter
@@ -69,7 +66,7 @@ Public Class HelpDesk
         Dim sqlInsertTicket As String = "INSERT INTO tickets(issue, reporter, repEmail, dateReported, severity, resolved) values(@issue, @reporter, @repEmail, @dateReported, @severity, @resolved)"
 
         'define the query as a SQLcommand object
-        Dim addTicketCommand As New SqlCommand(sqlInsertTicket, Connection)
+        Dim addTicketCommand As New SqlCommand(sqlInsertTicket, sqlbot.connection)
         'set the parameters to the ticket values
         addTicketCommand.Parameters.AddWithValue("@issue", ticket.Issue)
         addTicketCommand.Parameters.AddWithValue("@reporter", ticket.Reporter)
@@ -80,9 +77,9 @@ Public Class HelpDesk
 
         Try
             'attempt to send the info to the table
-            Connection.Open()
+            sqlbot.connection.Open()
             addTicketCommand.ExecuteNonQuery()
-            Connection.Close()
+            sqlbot.connection.Close()
         Catch ex As SqlException
             'if there is an issue show a msgbox with a description of the issue
             MsgBox(String.Format("Error: {0} {1}", ex.Number.ToString, ex.Message))
@@ -141,7 +138,7 @@ Public Class HelpDesk
                 Dim SQLStatement As String = "UPDATE Tickets SET assignment = @agent WHERE TicketID = @ID"
 
                 'convert the SQL string to a SQL command
-                Dim updateAssignementCMD As New SqlCommand(SQLStatement, Connection)
+                Dim updateAssignementCMD As New SqlCommand(SQLStatement, sqlbot.connection)
 
                 'set the parameters to be the selections made by the user
                 updateAssignementCMD.Parameters.AddWithValue("@agent", technician.TechID)
@@ -149,9 +146,9 @@ Public Class HelpDesk
 
                 Try
                     'attempt to write the change to the table
-                    Connection.Open()
+                    sqlbot.connection.Open()
                     updateAssignementCMD.ExecuteNonQuery()
-                    Connection.Close()
+                    sqlbot.connection.Close()
                     technician.emailTicket("New Ticket Assignment", String.Format("New ticket for you to work:{0}", supportTicket.ToString))
                 Catch ex As SqlException
                     'provide error information if this fails
